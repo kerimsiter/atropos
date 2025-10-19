@@ -142,10 +142,10 @@ export default function RegisterPage() {
 
         <div className="mx-auto w-full max-w-md">
           <div className="mt-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-[32px] leading-[40px] tracking-[-0.32px] font-bold text-[#141414]">
               Yeni Bir Hesap Oluşturun
             </h1>
-            <p className="mt-2 text-gray-500">
+            <p className="mt-2 text-[14px] text-[#757575]">
               Atropos'u kullanmaya başlamak için bilgilerinizi girin.
             </p>
           </div>
@@ -167,8 +167,8 @@ export default function RegisterPage() {
                   type="text"
                   placeholder="Yıldız Burger"
                   {...register("tenantName")}
-                  className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                    errors.tenantName ? "border-red-500" : "border-gray-300"
+                  className={`mt-1 w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                    errors.tenantName ? "border-red-500" : "border-[#E5E5E5]"
                   }`}
                 />
                 {errors.tenantName && (
@@ -185,8 +185,8 @@ export default function RegisterPage() {
                   placeholder="yildiz-burger"
                   {...register("tenantId")}
                   onFocus={() => setTenantIdTouched(true)}
-                  className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                    errors.tenantId ? "border-red-500" : "border-gray-300"
+                  className={`mt-1 w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                    errors.tenantId ? "border-red-500" : "border-[#E5E5E5]"
                   }`}
                 />
                 {errors.tenantId && (
@@ -204,8 +204,8 @@ export default function RegisterPage() {
                 type="text"
                 placeholder="Ali Veli"
                 {...register("adminName")}
-                className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                  errors.adminName ? "border-red-500" : "border-gray-300"
+                className={`mt-1 w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                  errors.adminName ? "border-red-500" : "border-[#E5E5E5]"
                 }`}
               />
               {errors.adminName && (
@@ -222,8 +222,8 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="ali.veli@email.com"
                 {...register("adminEmail")}
-                className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                  errors.adminEmail ? "border-red-500" : "border-gray-300"
+                className={`mt-1 w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                  errors.adminEmail ? "border-red-500" : "border-[#E5E5E5]"
                 }`}
               />
               {errors.adminEmail && (
@@ -239,14 +239,14 @@ export default function RegisterPage() {
                 id="adminPassword"
                 type={showPassword ? "text" : "password"}
                 {...register("adminPassword")}
-                className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                  errors.adminPassword ? "border-red-500" : "border-gray-300"
+                className={`mt-1 w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                  errors.adminPassword ? "border-red-500" : "border-[#E5E5E5]"
                 }`}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute bottom-2 right-3 text-gray-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#525252]"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -263,14 +263,14 @@ export default function RegisterPage() {
                 id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 {...register("confirmPassword")}
-                className={`mt-1 w-full rounded-md border bg-white px-3 py-2 text-gray-900 shadow-sm ${
-                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                className={`mt-1 w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                  errors.confirmPassword ? "border-red-500" : "border-[#E5E5E5]"
                 }`}
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute bottom-2 right-3 text-gray-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#525252]"
               >
                 {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -283,7 +283,8 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none disabled:cursor-not-allowed disabled:bg-green-400"
+                className="flex w-full justify-center rounded-[12px] border border-transparent px-8 py-4 text-[18px] font-medium text-white shadow-sm hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-[#2E9055] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+                style={{ backgroundImage: "linear-gradient(180deg, #35C56E 0%, #2E9055 100%)" }}
               >
                 {isSubmitting ? "Hesap Oluşturuluyor..." : "Hesabı Oluştur"}
               </button>

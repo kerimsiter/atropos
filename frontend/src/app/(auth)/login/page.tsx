@@ -104,10 +104,10 @@ export default function LoginPage() {
 
         <div className="mx-auto w-full max-w-md">
           <div className="mt-8 sm:mt-16">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-[32px] leading-[40px] tracking-[-0.32px] font-bold text-[#141414]">
               Atropos'a Hoşgeldiniz
             </h1>
-            <p className="mt-2 text-gray-500">
+            <p className="mt-2 text-[14px] text-[#757575]">
               Lütfen üyelik bilgileriniz ile giriş yapınız
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function LoginPage() {
             )}
             {/* Multi-tenant için kritik alan */}
             <div>
-              <label htmlFor="tenantId" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="tenantId" className="block text-[14px] font-medium text-[#141414]">
                 İşletme Kodu
               </label>
               <div className="mt-1">
@@ -129,8 +129,8 @@ export default function LoginPage() {
                   type="text"
                   autoComplete="organization"
                   placeholder="ornek-isletme"
-                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
-                    errors.tenantId ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  className={`w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#289E56] ${
+                    errors.tenantId ? "border-red-500 focus:border-red-500" : "border-[#E5E5E5] focus:border-[#289E56]"
                   }`}
                   {...register("tenantId")}
                 />
@@ -141,7 +141,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-[14px] font-medium text-[#141414]">
                 E-Posta Adresi veya Telefon Numarası
               </label>
               <div className="mt-1">
@@ -150,8 +150,8 @@ export default function LoginPage() {
                   type="email"
                   autoComplete="email"
                   placeholder="ornek@email.com"
-                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
-                    errors.email ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  className={`w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#289E56] ${
+                    errors.email ? "border-red-500 focus:border-red-500" : "border-[#E5E5E5] focus:border-[#289E56]"
                   }`}
                   {...register("email")}
                 />
@@ -162,7 +162,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-[14px] font-medium text-[#141414]">
                 Şifre
               </label>
               <div className="relative mt-1">
@@ -171,8 +171,8 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   placeholder="••••••••"
-                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
-                    errors.password ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  className={`w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#289E56] ${
+                    errors.password ? "border-red-500 focus:border-red-500" : "border-[#E5E5E5] focus:border-[#289E56]"
                   }`}
                   {...register("password")}
                 />
@@ -194,16 +194,16 @@ export default function LoginPage() {
                 <input
                   id="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                  className="h-5 w-5 rounded-[6px] border-2 border-[#A3A3A3] bg-white accent-[#289E56] shadow-sm focus:outline-none focus:ring-0 checked:border-[#289E56]"
                   {...register("rememberMe")}
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-[14px] text-[#141414]">
                   Beni Hatırla
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link href="/sifremi-unuttum" className="font-medium text-green-600 hover:text-green-500">
+                <Link href="/sifremi-unuttum" className="font-medium text-[#289E56] hover:opacity-90">
                   Şifremi Unuttum
                 </Link>
               </div>
@@ -213,7 +213,8 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-green-400"
+                className="flex w-full justify-center rounded-[12px] border border-transparent px-8 py-4 text-[18px] font-medium text-white shadow-sm hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-[#2E9055] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+                style={{ backgroundImage: "linear-gradient(180deg, #35C56E 0%, #2E9055 100%)" }}
               >
                 {isSubmitting ? "Giriş Yapılıyor..." : "Giriş Yap"}
               </button>
@@ -222,7 +223,7 @@ export default function LoginPage() {
 
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-[#E5E5E5]" />
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="bg-white px-2 text-gray-500">Veya</span>
@@ -232,7 +233,7 @@ export default function LoginPage() {
           <div>
             <Link
               href="/register"
-              className="flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+              className="flex w-full items-center justify-center gap-2 rounded-[12px] border border-[#E5E5E5] bg-white px-8 py-4 text-[16px] font-medium text-[#282828] shadow-sm hover:bg-gray-50 focus:outline-none"
             >
               <Plus className="h-5 w-5" />
               Üye Değil Misiniz? <strong>Şimdi Kaydolun</strong>
