@@ -4,9 +4,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff, Headphones, Plus, Quote } from "lucide-react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Zod validasyon şeması
+const loginSchema = z.object({
+  tenantId: z
+    .string()
+    .min(3, "İşletme kodu en az 3 karakter olmalıdır.")
+    .regex(/^[a-z0-9-]+$/, "Sadece küçük harf, rakam ve tire içerebilir."),
+  email: z.string().email("Lütfen geçerli bir e-posta adresi giriniz."),
+  password: z.string().min(6, "Şifre en az 6 karakter olmalıdır."),
+  rememberMe: z.boolean().optional(),
+});
+
+type LoginFormInputs = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    await new Promise((r) => setTimeout(r, 1000));
+    console.log("Form verileri:", data);
+    // TODO: API isteği (lib/api.ts)
+  };
 
   return (
     <main className="grid min-h-screen grid-cols-1 bg-white lg:grid-cols-2">
@@ -69,7 +98,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <form className="mt-8 space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
             {/* Multi-tenant için kritik alan */}
             <div>
               <label htmlFor="tenantId" className="block text-sm font-medium text-gray-700">
@@ -78,13 +107,17 @@ export default function LoginPage() {
               <div className="mt-1">
                 <input
                   id="tenantId"
-                  name="tenantId"
                   type="text"
                   autoComplete="organization"
-                  required
                   placeholder="ornek-isletme"
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:border-green-600 focus:outline-none focus:ring-green-600"
+                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
+                    errors.tenantId ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  }`}
+                  {...register("tenantId")}
                 />
+                {errors.tenantId && (
+                  <p className="mt-1 text-xs text-red-600">{errors.tenantId.message}</p>
+                )}
               </div>
             </div>
 
@@ -95,13 +128,17 @@ export default function LoginPage() {
               <div className="mt-1">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
-                  required
                   placeholder="ornek@email.com"
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:border-green-600 focus:outline-none focus:ring-green-600"
+                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
+                    errors.email ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  }`}
+                  {...register("email")}
                 />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+                )}
               </div>
             </div>
 
@@ -112,12 +149,13 @@ export default function LoginPage() {
               <div className="relative mt-1">
                 <input
                   id="password"
-                  name="password"
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
-                  required
                   placeholder="••••••••"
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:border-green-600 focus:outline-none focus:ring-green-600"
+                  className={`w-full rounded-md border bg-white px-3 py-2 text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-green-600 ${
+                    errors.password ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-green-600"
+                  }`}
+                  {...register("password")}
                 />
                 <button
                   type="button"
@@ -127,15 +165,18 @@ export default function LoginPage() {
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
+              {errors.password && (
+                <p className="mt-1 text-xs text-red-600">{errors.password.message}</p>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
                   id="remember-me"
-                  name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                  {...register("rememberMe")}
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                   Beni Hatırla
@@ -152,9 +193,10 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                disabled={isSubmitting}
+                className="flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-green-400"
               >
-                Giriş Yap
+                {isSubmitting ? "Giriş Yapılıyor..." : "Giriş Yap"}
               </button>
             </div>
           </form>
