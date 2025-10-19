@@ -47,3 +47,20 @@ export const loginUser = (credentials: LoginCredentials) => {
     body: JSON.stringify(credentials),
   });
 };
+
+// === YENİ KAYIT FONKSİYONU ===
+
+export type RegisterCredentials = {
+  tenantName: string; // İşletme Adı
+  tenantId: string; // İşletme Kodu (benzersiz)
+  adminName: string; // Yönetici Adı Soyadı
+  adminEmail: string; // Yönetici E-postası
+  adminPassword: string; // Yönetici Şifresi
+};
+
+export const registerUser = (credentials: RegisterCredentials) => {
+  return apiFetch("/auth/register", {
+    method: "POST",
+    body: JSON.stringify(credentials),
+  });
+};
