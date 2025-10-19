@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Eye, EyeOff, Headphones, Plus, Quote } from "lucide-react";
+import { Eye, EyeOff, Headphones, Plus, Quote, Check } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -171,7 +171,7 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   placeholder="••••••••"
-                  className={`w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#289E56] ${
+                  className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#289E56] ${
                     errors.password ? "border-red-500 focus:border-red-500" : "border-[#E5E5E5] focus:border-[#289E56]"
                   }`}
                   {...register("password")}
@@ -179,7 +179,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600"
+                  className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -190,17 +190,18 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
+              <label htmlFor="remember-me" className="flex cursor-pointer items-center gap-2">
                 <input
                   id="remember-me"
                   type="checkbox"
-                  className="h-5 w-5 rounded-[6px] border-2 border-[#A3A3A3] bg-white accent-[#289E56] shadow-sm focus:outline-none focus:ring-0 checked:border-[#289E56]"
+                  className="peer sr-only"
                   {...register("rememberMe")}
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-[14px] text-[#141414]">
-                  Beni Hatırla
-                </label>
-              </div>
+                <div className="flex h-5 w-5 items-center justify-center rounded-[6px] border-2 border-[#A3A3A3] bg-white peer-checked:border-[#289E56] peer-checked:bg-[#289E56]">
+                  <Check className="hidden h-4 w-4 text-white peer-checked:block" />
+                </div>
+                <span className="block text-[14px] text-[#141414]">Beni Hatırla</span>
+              </label>
 
               <div className="text-sm">
                 <Link href="/sifremi-unuttum" className="font-medium text-[#289E56] hover:opacity-90">

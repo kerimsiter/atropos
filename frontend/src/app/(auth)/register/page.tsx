@@ -231,49 +231,53 @@ export default function RegisterPage() {
               )}
             </div>
 
-            <div className="relative">
+            <div>
               <label htmlFor="adminPassword" className="block text-sm font-medium text-gray-700">
                 Şifre
               </label>
-              <input
-                id="adminPassword"
-                type={showPassword ? "text" : "password"}
-                {...register("adminPassword")}
-                className={`mt-1 w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
-                  errors.adminPassword ? "border-red-500" : "border-[#E5E5E5]"
-                }`}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#525252]"
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              <div className="relative mt-1">
+                <input
+                  id="adminPassword"
+                  type={showPassword ? "text" : "password"}
+                  {...register("adminPassword")}
+                  className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                    errors.adminPassword ? "border-red-500" : "border-[#E5E5E5]"
+                  }`}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {errors.adminPassword && (
                 <p className="mt-1 text-xs text-red-600">{errors.adminPassword.message}</p>
               )}
             </div>
 
-            <div className="relative">
+            <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                 Şifre Tekrar
               </label>
-              <input
-                id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                {...register("confirmPassword")}
-                className={`mt-1 w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
-                  errors.confirmPassword ? "border-red-500" : "border-[#E5E5E5]"
-                }`}
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#525252]"
-              >
-                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              <div className="relative mt-1">
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  {...register("confirmPassword")}
+                  className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                    errors.confirmPassword ? "border-red-500" : "border-[#E5E5E5]"
+                  }`}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {errors.confirmPassword && (
                 <p className="mt-1 text-xs text-red-600">{errors.confirmPassword.message}</p>
               )}
