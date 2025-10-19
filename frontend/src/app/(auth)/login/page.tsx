@@ -7,6 +7,8 @@ import { Eye, EyeOff, Headphones, Plus, Quote } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { loginUser } from "@/lib/api";
 
 // Zod validasyon şeması
 const loginSchema = z.object({
@@ -23,6 +25,8 @@ type LoginFormInputs = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,9 +36,19 @@ export default function LoginPage() {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    console.log("Form verileri:", data);
-    // TODO: API isteği (lib/api.ts)
+    setServerError(null);
+    try {
+      const response = await loginUser({
+        tenantId: data.tenantId,
+        email: data.email,
+        password: data.password,
+      });
+      console.log("Giriş başarılı:", response);
+      router.push("/dashboard");
+    } catch (err: any) {
+      console.error("Giriş hatası:", err);
+      setServerError(err?.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
+    }
   };
 
   return (
@@ -99,6 +113,11 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+            {serverError && (
+              <div className="rounded-md border border-red-400 bg-red-50 p-4 text-sm text-red-700">
+                {serverError}
+              </div>
+            )}
             {/* Multi-tenant için kritik alan */}
             <div>
               <label htmlFor="tenantId" className="block text-sm font-medium text-gray-700">
