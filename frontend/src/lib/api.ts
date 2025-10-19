@@ -55,6 +55,7 @@ export type RegisterCredentials = {
   tenantId: string; // İşletme Kodu (benzersiz)
   adminName: string; // Yönetici Adı Soyadı
   adminEmail: string; // Yönetici E-postası
+  adminPhone?: string; // Yönetici Telefon Numarası (opsiyonel)
   adminPassword: string; // Yönetici Şifresi
 };
 

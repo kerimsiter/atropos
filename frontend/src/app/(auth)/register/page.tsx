@@ -21,6 +21,7 @@ const registerSchema = z
       .regex(/^[a-z0-9-]+$/, "Sadece küçük harf, rakam ve tire içerebilir."),
     adminName: z.string().min(2, "Ad soyad en az 2 karakter olmalıdır."),
     adminEmail: z.string().email("Lütfen geçerli bir e-posta adresi giriniz."),
+    adminPhone: z.string().optional(),
     adminPassword: z.string().min(6, "Şifre en az 6 karakter olmalıdır."),
     confirmPassword: z.string().min(6, "Şifre tekrarı en az 6 karakter olmalıdır."),
   })
@@ -75,6 +76,7 @@ export default function RegisterPage() {
         tenantId: data.tenantId,
         adminName: data.adminName,
         adminEmail: data.adminEmail,
+        adminPhone: data.adminPhone,
         adminPassword: data.adminPassword,
       });
       console.log("Kayıt başarılı:", response);
@@ -232,55 +234,75 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="adminPassword" className="block text-sm font-medium text-gray-700">
-                Şifre
+              <label htmlFor="adminPhone" className="block text-sm font-medium text-gray-700">
+                Telefon Numarası (Opsiyonel)
               </label>
-              <div className="relative mt-1">
-                <input
-                  id="adminPassword"
-                  type={showPassword ? "text" : "password"}
-                  {...register("adminPassword")}
-                  className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
-                    errors.adminPassword ? "border-red-500" : "border-[#E5E5E5]"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-              {errors.adminPassword && (
-                <p className="mt-1 text-xs text-red-600">{errors.adminPassword.message}</p>
+              <input
+                id="adminPhone"
+                type="tel"
+                placeholder="555 123 4567"
+                {...register("adminPhone")}
+                className={`mt-1 w-full rounded-[12px] border bg-white px-5 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                  errors.adminPhone ? "border-red-500" : "border-[#E5E5E5]"
+                }`}
+              />
+              {errors.adminPhone && (
+                <p className="mt-1 text-xs text-red-600">{errors.adminPhone.message}</p>
               )}
             </div>
 
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Şifre Tekrar
-              </label>
-              <div className="relative mt-1">
-                <input
-                  id="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  {...register("confirmPassword")}
-                  className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
-                    errors.confirmPassword ? "border-red-500" : "border-[#E5E5E5]"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
-                >
-                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="adminPassword" className="block text-sm font-medium text-gray-700">
+                  Şifre
+                </label>
+                <div className="relative mt-1">
+                  <input
+                    id="adminPassword"
+                    type={showPassword ? "text" : "password"}
+                    {...register("adminPassword")}
+                    className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                      errors.adminPassword ? "border-red-500" : "border-[#E5E5E5]"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {errors.adminPassword && (
+                  <p className="mt-1 text-xs text-red-600">{errors.adminPassword.message}</p>
+                )}
               </div>
-              {errors.confirmPassword && (
-                <p className="mt-1 text-xs text-red-600">{errors.confirmPassword.message}</p>
-              )}
+
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                  Şifre Tekrar
+                </label>
+                <div className="relative mt-1">
+                  <input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    {...register("confirmPassword")}
+                    className={`w-full rounded-[12px] border bg-white px-5 pr-12 py-4 text-[#141414] placeholder-[#A3A3A3] shadow-sm ${
+                      errors.confirmPassword ? "border-red-500" : "border-[#E5E5E5]"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-4 top-4 text-[#A3A3A3] hover:text-[#525252]"
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {errors.confirmPassword && (
+                  <p className="mt-1 text-xs text-red-600">{errors.confirmPassword.message}</p>
+                )}
+              </div>
             </div>
 
             <div className="pt-2">
